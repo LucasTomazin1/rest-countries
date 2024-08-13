@@ -1,15 +1,21 @@
-'use client'
+'use server'
 
-// Tipos para os dados dos países
-interface Country {
+export interface Country {
   name: {
     common: string
+    official: string
   }
-  capital: string
+  capital: string[]
   region: string
   population: number
+  continents: string[]
+  borders: string[]
   flags: {
+    alt: string
     png: string
+  }
+  languages: {
+    [key: string]: string
   }
 }
 
@@ -24,11 +30,10 @@ export const getCountries = async (): Promise<Country[]> => {
   }
 }
 
-export const getCountry = async (name: string): Promise<Country[] | null> => {
+export const getCountry = async (name: string): Promise<Country | null> => {
   try {
     const results = await fetch(`https://restcountries.com/v3.1/name/${name}`)
-    const data: Country[] = await results.json()
-    console.log(data)
+    const data: Country = await results.json()
     return data
   } catch (error) {
     console.log('getCountry error: ', error)

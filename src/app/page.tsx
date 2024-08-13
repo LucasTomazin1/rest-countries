@@ -1,3 +1,4 @@
+'use client'
 import { CountryCard } from '@/components/country-card/CountryCard'
 import { SearchBar } from '@/components/search-bar/SearchBar'
 

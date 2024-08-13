@@ -2,41 +2,45 @@
 import Image from 'next/image'
 import { getCountry } from '../../service/api'
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 import { FaHouseChimney } from 'react-icons/fa6'
 
 export default function Country({ params }: { params: { name: string } }) {
-  const router = useRouter()
-  const { name } = router.query
+  const { name } = params
   const [country, setCountry] = useState<any>()
 
   useEffect(() => {
-    if (!router.isReady) return
     const fetchData = async () => {
-      const data = await getCountry(name as string)
-      if (data) setCountry(data[0])
+      const data = await getCountry(name)
+      if (data) setCountry(data)
     }
     fetchData()
-  }, [params.name])
-
-  console.log(country)
+  }, [name])
 
   if (!country) return <p>Loading...</p>
+  const countryData = country[0]
+  console.log(countryData)
+
   return (
     <main>
-      <button onClick={() => router.back()}>
+      <button onClick={() => window.history.back()}>
         <FaHouseChimney />
       </button>
       <div>
         <div>
-          <Image src={country.flags.png} alt={country.name.common} />
+          <Image
+            width={250}
+            height={250}
+            src={countryData.flags.png}
+            alt={countryData.flags.alt}
+          />
         </div>
         <div>
-          <h2>{country.name.common}</h2>
-          <p>{country.capital}</p>
-          <p>{country.region}</p>
-          <p>{country.population.toLocaleString('pt-BR')}</p>
-          <p>{country.languages[Object.keys(country.languages)[0]]}</p>
+          <h2>{countryData.name.common}</h2>
+          <p>{countryData.capital.join(', ')}</p>
+          <p>{countryData.region}</p>
+          <p>{countryData.continents.join(', ')}</p>
+          <p>{countryData.borders?.join(', ')}</p>
+          <p>{countryData.languages[Object.keys(countryData.languages)[0]]}</p>
         </div>
       </div>
     </main>
