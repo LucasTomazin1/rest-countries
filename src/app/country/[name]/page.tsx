@@ -2,7 +2,8 @@
 import Image from 'next/image'
 import { getCountry } from '../../service/api'
 import { useEffect, useState } from 'react'
-import { FaHouseChimney } from 'react-icons/fa6'
+import { FaArrowLeftLong, FaHouseChimney } from 'react-icons/fa6'
+import Link from 'next/link'
 
 export default function Country({ params }: { params: { name: string } }) {
   const { name } = params
@@ -21,28 +22,65 @@ export default function Country({ params }: { params: { name: string } }) {
   console.log(countryData)
 
   return (
-    <main>
-      <button onClick={() => window.history.back()}>
-        <FaHouseChimney />
-      </button>
-      <div>
+    <div className="flex flex-col p-10 gap-10">
+      <div className="flex gap-8 items-center">
+        <Link
+          href="/"
+          className="flex gap-2 items-center px-6 py-2 hover:bg-slate-100 rounded  shadow-slate-400 shadow-lg"
+        >
+          <FaArrowLeftLong />
+          <p>Back</p>
+        </Link>
+      </div>
+      <main className="flex gap-7">
         <div>
           <Image
-            width={250}
+            width={400}
             height={250}
             src={countryData.flags.png}
             alt={countryData.flags.alt}
+            className="object-contain h-auto"
           />
         </div>
-        <div>
-          <h2>{countryData.name.common}</h2>
-          <p>{countryData.capital.join(', ')}</p>
-          <p>{countryData.region}</p>
-          <p>{countryData.continents.join(', ')}</p>
-          <p>{countryData.borders?.join(', ')}</p>
-          <p>{countryData.languages[Object.keys(countryData.languages)[0]]}</p>
+        <div className="flex flex-col">
+          <h2 className="font-bold text-2xl mb-6">{countryData.name.common}</h2>
+          <div className="flex flex-col gap-2 mb-10">
+            <p>
+              <strong>Oficial Name:</strong> {countryData.name.official}
+            </p>
+            <p>
+              <strong>Population:</strong>{' '}
+              {countryData.population.toLocaleString('pt-BR')}
+            </p>
+            <p>
+              <strong>Capital:</strong> {countryData.capital.join(', ')}
+            </p>
+            <p>
+              <strong>Region:</strong> {countryData.region}
+            </p>
+            <p>
+              <strong>Continents:</strong> {countryData.continents.join(', ')}
+            </p>
+            <p>
+              <strong>Language:</strong>{' '}
+              {countryData.languages[Object.keys(countryData.languages)[0]]}
+            </p>
+          </div>
+          <div className="flex items-center">
+            <h3 className="font-bold">Border Countries:</h3>
+            <ul className="flex">
+              {countryData.borders?.map((border: string) => (
+                <li
+                  key={border}
+                  className="py-[1px] px-5 hover:bg-slate-100 hover:cursor-pointer rounded ml-2 shadow-slate-400 shadow-lg"
+                >
+                  <p className="text-sm">{border}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   )
 }

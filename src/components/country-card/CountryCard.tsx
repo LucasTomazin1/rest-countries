@@ -7,8 +7,9 @@ import { useEffect, useState } from 'react'
 export interface country {
   name: {
     common: string
+    official: string
   }
-  capital: string
+  capital: string[]
   region: string
   population: number
   flags: {
