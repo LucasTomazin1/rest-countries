@@ -5,11 +5,11 @@ import { SearchBar } from '@/components/search-bar/SearchBar'
 export default function Home() {
   return (
     <>
-      <header className="p-10">
+      <header className="p-2 md:p-10">
         <SearchBar />
       </header>
       <main>
-        <div className="flex gap-10 p-10 flex-wrap justify-center">
+        <div className="flex gap-10 p-5 md:p-10 flex-wrap justify-center">
           <CountryCard />
         </div>
       </main>

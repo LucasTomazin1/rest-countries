@@ -26,13 +26,13 @@ export default function Country({ params }: { params: { name: string } }) {
       <div className="flex gap-8 items-center">
         <Link
           href="/"
-          className="flex gap-2 items-center px-6 py-2 hover:bg-slate-100 rounded  shadow-slate-400 shadow-lg"
+          className="flex gap-2 items-center px-6 py-2 hover:bg-slate-100 rounded  shadow-slate-400 shadow-md"
         >
           <FaArrowLeftLong />
           <p>Back</p>
         </Link>
       </div>
-      <main className="flex gap-7">
+      <main className="flex flex-col gap-7 md:flex-row">
         <div>
           <Image
             width={400}
@@ -66,19 +66,21 @@ export default function Country({ params }: { params: { name: string } }) {
               {countryData.languages[Object.keys(countryData.languages)[0]]}
             </p>
           </div>
-          <div className="flex items-center">
-            <h3 className="font-bold">Border Countries:</h3>
-            <ul className="flex">
-              {countryData.borders?.map((border: string) => (
-                <li
-                  key={border}
-                  className="py-[1px] px-5 hover:bg-slate-100 hover:cursor-pointer rounded ml-2 shadow-slate-400 shadow-lg"
-                >
-                  <p className="text-sm">{border}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {countryData.borders ? (
+            <div className="flex flex-col gap-2 items-start md:flex-row">
+              <h3 className="font-bold whitespace-nowrap">Border Countries:</h3>
+              <ul className="flex flex-wrap gap-2">
+                {countryData.borders?.map((border: string) => (
+                  <li
+                    key={border}
+                    className="py-[1px] px-5 hover:bg-slate-100 hover:cursor-pointer rounded shadow-slate-400 shadow-md"
+                  >
+                    <p className="text-sm">{border}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </div>
       </main>
     </div>
