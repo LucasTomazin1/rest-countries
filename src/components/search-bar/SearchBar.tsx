@@ -1,8 +1,9 @@
+import { Country } from '@/app/service/api'
 import { useState } from 'react'
 import { IoMdSearch } from 'react-icons/io'
 
 interface SearchBarProps {
-  countries: string[]
+  countries: Country[]
 }
 export const SearchBar = ({ countries }: SearchBarProps) => {
   const [search, setSearch] = useState('')

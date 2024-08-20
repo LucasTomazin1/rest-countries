@@ -1,33 +1,11 @@
 'use client'
-import { getCountries } from '@/app/service/api'
+import { Country } from '@/app/service/api'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 
-export interface country {
-  name: {
-    common: string
-    official: string
-  }
-  capital: string[]
-  region: string
-  population: number
-  flags: {
-    png: string
-  }
-}
-
-export const CountryCard: React.FC = () => {
-  const [countries, setCountries] = useState<country[]>([])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getCountries()
-      setCountries(data)
-    }
-    fetchData()
-  }, [])
-
+export const CountryCards: React.FC<{ countries: Country[] }> = ({
+  countries,
+}) => {
   return (
     <>
       {countries.map((country, index) => (
