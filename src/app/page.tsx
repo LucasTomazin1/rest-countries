@@ -14,6 +14,7 @@ export default function Home() {
     }
     fetchData()
   }, [])
+
   return (
     <>
       <header className="p-2 md:p-10">

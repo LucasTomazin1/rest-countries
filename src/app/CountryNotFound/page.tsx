@@ -1,12 +1,10 @@
-import { useRouter } from 'next/router'
 import Fuse from 'fuse.js'
 
-const countries = ['']
-export const CountryNotFound = () => {
-  const router = useRouter()
-  const { search } = router.query
+export const CountryNotFound = ({ params }: { params: { search: string } }) => {
+  const { search } = params
 
   const fuse = new Fuse(countries, {
+    keys: ['name'],
     includeScore: true,
     threshold: 0.3,
   })
