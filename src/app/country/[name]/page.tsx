@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import { getCountry } from '../../service/api'
 import { useEffect, useState } from 'react'
-import { FaArrowLeftLong, FaHouseChimney } from 'react-icons/fa6'
+import { FaArrowLeftLong } from 'react-icons/fa6'
 import Link from 'next/link'
 
 export default function Country({ params }: { params: { name: string } }) {
@@ -22,7 +22,7 @@ export default function Country({ params }: { params: { name: string } }) {
   console.log(countryData)
 
   return (
-    <div className="flex flex-col p-10 gap-10">
+    <div className="flex flex-col p-3 md:p-10 gap-5 md:gap-10">
       <div className="flex gap-8 items-center">
         <Link
           href="/"
