@@ -1,9 +1,10 @@
 'use client'
 import Image from 'next/image'
-import { getCountries, getCountry } from '../../service/api'
+import { getCountry } from '../../service/api'
 import { useEffect, useState } from 'react'
 import { FaArrowLeftLong } from 'react-icons/fa6'
 import Link from 'next/link'
+import type { Country } from '@/app/service/api'
 
 export default function Country({ params }: { params: { name: string } }) {
   const { name } = params

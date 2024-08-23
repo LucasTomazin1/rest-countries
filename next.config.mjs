@@ -1,6 +1,7 @@
+// next.config.mjs
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  //   output: 'export',
   basePath: '/rest-countries',
   images: {
     domains: ['flagcdn.com', 'upload.wikimedia.org'],
@@ -8,3 +9,16 @@ const nextConfig = {
 }
 
 export default nextConfig
+
+// next.config.js
+
+// /** @type {import('next').NextConfig} */
+// const nextConfig = {
+//   output: 'export',
+//   basePath: '/rest-countries',
+//   images: {
+//     domains: ['flagcdn.com', 'upload.wikimedia.org'],
+//   },
+// }
+
+// module.exports = nextConfig
