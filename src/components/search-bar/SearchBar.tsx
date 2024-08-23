@@ -50,7 +50,7 @@ export const SearchBar = ({ countries }: SearchBarProps) => {
   }
   return (
     <>
-      <div className="flex shadow-xl rounded-lg w-80">
+      <div className="flex shadow-md rounded-lg w-68 sm:w-80">
         <button className="p-3 ">
           <IoMdSearch
             onClick={onClickHandler}

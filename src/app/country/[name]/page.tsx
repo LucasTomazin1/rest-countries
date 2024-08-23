@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { getCountry } from '../../service/api'
+import { getCountries, getCountry } from '../../service/api'
 import { useEffect, useState } from 'react'
 import { FaArrowLeftLong } from 'react-icons/fa6'
 import Link from 'next/link'

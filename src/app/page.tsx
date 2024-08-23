@@ -2,7 +2,8 @@
 import { CountryCards } from '@/components/country-card/CountryCard'
 import { SearchBar } from '@/components/search-bar/SearchBar'
 import { useEffect, useState } from 'react'
-import { Country, getCountries } from './service/api'
+import { Country, getCountries, getCountriesByRegion } from './service/api'
+import { FilterByRegion } from '@/components/filter-by-region/FilterByRegion'
 
 export default function Home() {
   const [countries, setCountries] = useState<Country[]>([])
@@ -15,16 +16,27 @@ export default function Home() {
     fetchData()
   }, [])
 
+  const handleFilterChange = async (region: string) => {
+    if (region === 'All regions') {
+      const data = await getCountries()
+      setCountries(data)
+    } else {
+      const data = await getCountriesByRegion({ region })
+      setCountries(data)
+    }
+  }
+
   return (
     <>
-      <header className="p-2 md:p-10">
+      <section className="flex flex-col p-2 min-w-full justify-between gap-5 md:p-10 md:flex-row">
         <SearchBar countries={countries} />
-      </header>
-      <main>
-        <div className="flex gap-10 p-5 md:p-10 flex-wrap justify-center">
+        <FilterByRegion onFilterChange={handleFilterChange} />
+      </section>
+      <section>
+        <div className="flex gap-10 p-2 md:p-10 flex-wrap justify-center">
           <CountryCards countries={countries} />
         </div>
-      </main>
+      </section>
     </>
   )
 }

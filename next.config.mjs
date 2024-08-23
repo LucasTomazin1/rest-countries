@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   //   output: 'export',
-  //   basePath: '/rest-countries',
+  basePath: '/rest-countries',
   images: {
     domains: ['flagcdn.com', 'upload.wikimedia.org'],
   },
