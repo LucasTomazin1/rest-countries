@@ -27,7 +27,7 @@ export default function CountryDetails() {
   const countryData = country[0]
 
   return (
-    <div className="flex flex-col p-3 gap-5 md:p-10 md:gap-10">
+    <div className="flex flex-col p-3 gap-5 md:p-10 md:gap-10 min-h-screen-m-72">
       <div className="flex gap-8 items-center">
         <Link
           to="/"
