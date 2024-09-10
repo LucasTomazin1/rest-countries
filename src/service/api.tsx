@@ -1,5 +1,3 @@
-'use server'
-
 export interface Country {
   name: {
     common: string

@@ -1,7 +1,5 @@
-'use client'
-import { Country } from '@/app/service/api'
-import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from 'react-router-dom'
+import { Country } from '../../service/api'
 
 export const CountryCards: React.FC<{ countries: Country[] }> = ({
   countries,
@@ -12,11 +10,11 @@ export const CountryCards: React.FC<{ countries: Country[] }> = ({
         <Link
           onClick={() => country.name.common}
           key={index}
-          href={`/country/${country.name.common.toLowerCase()}`}
+          to={`/country/${country.name.common.toLowerCase()}`}
           className="flex flex-col overflow-hidden rounded shadow-md w-64 sm:w-56"
         >
           <div className="">
-            <Image
+            <img
               width={250}
               height={160}
               src={country.flags.png}

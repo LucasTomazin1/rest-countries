@@ -1,31 +1,37 @@
-'use client'
-import Image from 'next/image'
-import { getCountry } from '../../service/api'
+import { getCountry } from '../service/api'
 import { useEffect, useState } from 'react'
 import { FaArrowLeftLong } from 'react-icons/fa6'
-import Link from 'next/link'
-import type { Country } from '@/app/service/api'
+import type { Country } from '../service/api'
+import { useParams, Link } from 'react-router-dom'
 
-export default function Country({ params }: { params: { name: string } }) {
-  const { name } = params
-  const [countryData, setCountryData] = useState<any>()
+export default function CountryDetails() {
+  const { name } = useParams<{ name?: string }>()
+  const [country, setCountry] = useState<Country[] | null>(null)
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getCountry(name)
-      if (data) setCountryData(data)
+      if (name) {
+        const data = await getCountry(name)
+        if (data && Array.isArray(data)) {
+          setCountry(data)
+        }
+      }
     }
     fetchData()
   }, [name])
 
-  if (!countryData) return <p>Loading...</p>
+  console.log(country)
+
+  if (!country || country.length === 0) return <p>Loading...</p>
+
+  const countryData = country[0]
 
   return (
     <div className="flex flex-col p-3 gap-5 md:p-10 md:gap-10">
       <div className="flex gap-8 items-center">
         <Link
-          href="/"
-          className="flex gap-2 items-center px-6 py-2 hover:bg-slate-100 rounded  shadow-slate-400 shadow"
+          to="/"
+          className="flex gap-2 items-center px-6 py-2 rounded shadow"
         >
           <FaArrowLeftLong />
           <p>Back</p>
@@ -33,12 +39,10 @@ export default function Country({ params }: { params: { name: string } }) {
       </div>
       <main className="flex flex-col gap-4 w-full md:flex-row">
         <div className=" md:max-w-[40%]">
-          <Image
-            width={400}
-            height={250}
+          <img
             src={countryData.flags.png}
             alt={countryData.flags.alt}
-            className="object-contain h-auto"
+            className="object-contain w-[500px] h-auto"
           />
         </div>
         <div className="flex flex-col flex-1">
@@ -72,7 +76,7 @@ export default function Country({ params }: { params: { name: string } }) {
                 {countryData.borders?.map((border: string) => (
                   <li
                     key={border}
-                    className="py-[1px] px-5 hover:bg-slate-100 hover:cursor-pointer rounded shadow-slate-400 shadow"
+                    className="py-[1px] px-5 hover:cursor-pointer rounded shadow"
                   >
                     <p className="text-sm">{border}</p>
                   </li>
