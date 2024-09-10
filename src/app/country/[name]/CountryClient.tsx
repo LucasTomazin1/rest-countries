@@ -1,24 +1,26 @@
 'use client'
+
 import Image from 'next/image'
-import { getCountry } from '../../service/api'
 import { useEffect, useState } from 'react'
 import { FaArrowLeftLong } from 'react-icons/fa6'
 import Link from 'next/link'
+import { getCountry } from '../../service/api'
 import type { Country } from '@/app/service/api'
 
-export default function Country({ params }: { params: { name: string } }) {
-  const { name } = params
-  const [countryData, setCountryData] = useState<any>()
+export default function CountryClient({ name }: { name: string }) {
+  const [country, setCountry] = useState<any>()
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getCountry(name)
-      if (data) setCountryData(data)
+      if (data) setCountry(data)
     }
     fetchData()
   }, [name])
 
-  if (!countryData) return <p>Loading...</p>
+  if (!country) return <p>Loading...</p>
+  const countryData = country[0]
+  console.log(countryData)
 
   return (
     <div className="flex flex-col p-3 gap-5 md:p-10 md:gap-10">
