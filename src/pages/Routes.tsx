@@ -5,7 +5,7 @@ import CountryDetails from './CountryDetails'
 export const AppRoutes: React.FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/rest-countries" element={<Home />} />
       <Route path="/country/:name" element={<CountryDetails />} />
     </Routes>
   )
