@@ -31,7 +31,7 @@ export default function CountryDetails() {
       <div className="flex gap-8 items-center">
         <Link
           to="/"
-          className="flex gap-2 items-center px-6 py-2 hover:bg-slate-100 rounded  shadow-slate-400 shadow"
+          className="flex gap-2 items-center px-6 py-2 rounded shadow"
         >
           <FaArrowLeftLong />
           <p>Back</p>
@@ -76,7 +76,7 @@ export default function CountryDetails() {
                 {countryData.borders?.map((border: string) => (
                   <li
                     key={border}
-                    className="py-[1px] px-5 hover:bg-slate-100 hover:cursor-pointer rounded shadow-slate-400 shadow"
+                    className="py-[1px] px-5 hover:cursor-pointer rounded shadow"
                   >
                     <p className="text-sm">{border}</p>
                   </li>

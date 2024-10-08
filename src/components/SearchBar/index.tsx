@@ -3,11 +3,14 @@ import Fuse from 'fuse.js'
 import { useState } from 'react'
 import { IoMdSearch } from 'react-icons/io'
 import { Link } from 'react-router-dom'
+import { useTheme } from '../../hooks/UseTheme'
 
 interface SearchBarProps {
   countries: Country[]
 }
 export const SearchBar = ({ countries }: SearchBarProps) => {
+  const { theme } = useTheme()
+  const isDarkMode = theme === 'dark'
   const [search, setSearch] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const [suggestions, setSuggestions] = useState<string[]>([])
@@ -50,7 +53,11 @@ export const SearchBar = ({ countries }: SearchBarProps) => {
   }
   return (
     <>
-      <div className="flex shadow-md rounded-lg w-68 sm:w-80">
+      <div
+        className={`flex shadow-md rounded-lg w-68 sm:w-80 ${
+          isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'
+        }`}
+      >
         <button className="p-3 ">
           <IoMdSearch
             onClick={onClickHandler}
@@ -60,7 +67,9 @@ export const SearchBar = ({ countries }: SearchBarProps) => {
         <input
           onChange={onChangeHandler}
           onKeyPress={onEnterPress}
-          className="focus:outline-none w-screen rounded-lg"
+          className={`focus:outline-none w-screen rounded-lg ${
+            isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'
+          }`}
           placeholder="Search for a country..."
         />
       </div>
